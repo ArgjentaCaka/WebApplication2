@@ -28,6 +28,19 @@
                     <li>@Html.ActionLink("User", "Index", "User")</li>
                     <li>@Html.ActionLink("Payment", "Index", "Payment")</li>
                 </ul>
+
+                <ul class="nav navbar-nav" style="float:right !important">
+                    @if (Session["UsernameUsSS"] != null)
+                    {
+                        <li><p style="color: #fff; margin-top: 15px;">Hello @Session["UsernameUsSS"]</p></li>
+                        <li>@Html.ActionLink("Logout", "Logout", "Home")</li>
+                    }
+                    else
+                    {
+                        <li>@Html.ActionLink("Signup", "Signup", "Home")</li>
+                        <li>@Html.ActionLink("Login", "Login", "Home")</li>
+                    }
+                </ul>
             </div>
         </div>
     </div>
