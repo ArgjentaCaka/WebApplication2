@@ -14,10 +14,14 @@ namespace WebApplication2.Controllers
     {
         private WebEntities db = new WebEntities();
 
+        public WebEntities Db => Db1;
+
+        public WebEntities Db1 { get => db; set => db = value; }
+
         // GET: Lesson
         public ActionResult Index()
         {
-            return View(db.lessons.ToList());
+            return View(Db.lessons.ToList());
         }
 
         // GET: Lesson/Details/5
@@ -27,7 +31,7 @@ namespace WebApplication2.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            lesson lesson = db.lessons.Find(id);
+            lesson lesson = Db.lessons.Find(id);
             if (lesson == null)
             {
                 return HttpNotFound();
@@ -50,8 +54,8 @@ namespace WebApplication2.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.lessons.Add(lesson);
-                db.SaveChanges();
+                Db.lessons.Add(lesson);
+                Db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
@@ -65,7 +69,7 @@ namespace WebApplication2.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            lesson lesson = db.lessons.Find(id);
+            lesson lesson = Db.lessons.Find(id);
             if (lesson == null)
             {
                 return HttpNotFound();
@@ -82,8 +86,8 @@ namespace WebApplication2.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(lesson).State = EntityState.Modified;
-                db.SaveChanges();
+                Db.Entry(lesson).State = EntityState.Modified;
+                Db.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(lesson);
@@ -96,7 +100,7 @@ namespace WebApplication2.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            lesson lesson = db.lessons.Find(id);
+            lesson lesson = Db.lessons.Find(id);
             if (lesson == null)
             {
                 return HttpNotFound();
@@ -109,9 +113,9 @@ namespace WebApplication2.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            lesson lesson = db.lessons.Find(id);
-            db.lessons.Remove(lesson);
-            db.SaveChanges();
+            lesson lesson = Db.lessons.Find(id);
+            Db.lessons.Remove(lesson);
+            Db.SaveChanges();
             return RedirectToAction("Index");
         }
 
@@ -119,7 +123,7 @@ namespace WebApplication2.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                Db.Dispose();
             }
             base.Dispose(disposing);
         }

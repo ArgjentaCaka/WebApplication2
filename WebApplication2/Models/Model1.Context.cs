@@ -12,9 +12,14 @@ namespace WebApplication2.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    
+    using WebApplication2.Controllers;
+
     public partial class WebEntities : DbContext
     {
+        internal object schedule;
+        internal object service;
+        internal object Staff;
+
         public WebEntities()
             : base("name=WebEntities")
         {
@@ -31,5 +36,8 @@ namespace WebApplication2.Models
         public virtual DbSet<payment> payments { get; set; }
         public virtual DbSet<registration> registrations { get; set; }
         public virtual DbSet<user> users { get; set; }
+        public object Schedule { get; internal set; }
+
+        
     }
 }
